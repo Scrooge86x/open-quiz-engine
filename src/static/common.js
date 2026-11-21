@@ -111,3 +111,37 @@ function renderLeaderboard(entries, tableEl, bodyEl, emptyEl) {
     tableEl.style.display = "table";
   }
 }
+
+var THEME_STORAGE_KEY = "quiz-theme";
+
+function initThemeToggle() {
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) {
+    return;
+  }
+
+  function currentTheme() {
+    return document.documentElement.dataset.theme || "dark";
+  }
+
+  function updateButtonText() {
+    btn.textContent = currentTheme() === "dark" ? "Light mode" : "Dark mode";
+  }
+
+  updateButtonText();
+
+  btn.addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, next);
+    } catch (e) {
+      // localStorage unavailable
+    }
+    updateButtonText();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initThemeToggle();
+});
