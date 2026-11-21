@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from src.api.attempt_routes import router as attempt_router
 from src.api.error_handlers import register_error_handlers
 from src.api.quiz_routes import router as quiz_router
 from src.config import APP_TITLE, APP_VERSION, DATABASE_URL
@@ -14,6 +15,7 @@ def create_app(database_url: str = DATABASE_URL) -> FastAPI:
     app.state.session_factory = session_factory
     register_error_handlers(app)
     app.include_router(quiz_router)
+    app.include_router(attempt_router)
     return app
 
 
