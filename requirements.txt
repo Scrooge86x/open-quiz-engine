@@ -1,0 +1,5 @@
+fastapi>=0.120
+uvicorn[standard]>=0.38
+sqlalchemy>=2.0.44
+pydantic>=2.12
+httpx>=0.28
