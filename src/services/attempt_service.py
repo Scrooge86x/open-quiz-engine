@@ -1,7 +1,7 @@
+import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime
-import uuid
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -87,9 +87,7 @@ class AttemptService:
         if attempt.is_finished:
             raise AttemptFinishedError()
 
-        current_question = self._get_question_by_position(
-            attempt.quiz_id, attempt.current_position
-        )
+        current_question = self._get_question_by_position(attempt.quiz_id, attempt.current_position)
         if question_id != current_question.id:
             raise WrongQuestionError()
 
