@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play</title>
+  <script src="theme-init.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle color theme"></button>
+  <div class="container">
+    <div id="play-view" class="main-content hidden">
+      <div>
+        <p id="progress" class="text-muted" style="font-size: 0.95rem; margin-bottom: 0.25rem;"></p>
+        <p id="meta" class="text-muted" style="font-size: 0.9rem;"></p>
+      </div>
+      <h2 id="question-text"></h2>
+      <div id="options"></div>
+      <div id="error-box" class="hidden"></div>
+      <div id="feedback" class="feedback hidden">
+        <p id="feedback-message" style="font-weight: 600;"></p>
+        <button type="button" id="next-btn"></button>
+      </div>
+    </div>
+
+    <div id="not-found-view" class="not-found-view hidden">
+      <p id="not-found-message" class="not-found-message"></p>
+      <p><a href="/" class="not-found-link">Back to home</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Questions come from <a href="https://opentdb.com" target="_blank" rel="noopener noreferrer" class="footer-link">Open Trivia DB (https://opentdb.com)</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="footer-link">CC BY-SA 4.0</a>.</p>
+  </footer>
+
+  <script src="common.js"></script>
+  <script src="play.js"></script>
+</body>
+</html>

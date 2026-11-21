@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result</title>
+  <script src="theme-init.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle color theme"></button>
+  <div class="container">
+    <div id="result-view" class="main-content hidden">
+      <h1>Quiz Result</h1>
+
+      <div class="quiz-info">
+        <p><strong>Nick:</strong> <span id="result-nick"></span></p>
+        <p><strong>Score:</strong> <span id="result-score"></span></p>
+        <p><strong>Time:</strong> <span id="result-time"></span></p>
+      </div>
+
+      <div id="not-finished" class="not-finished hidden">
+        <p class="text-muted">This attempt is not finished yet.</p>
+        <p><a id="back-to-game" href="#" class="back-link">Back to the game</a></p>
+      </div>
+
+      <div id="error-box" class="hidden"></div>
+
+      <div class="leaderboard-section">
+        <h2>Leaderboard</h2>
+        <p id="leaderboard-empty" class="hidden text-muted">Nobody has finished this quiz yet.</p>
+        <table id="leaderboard-table" class="hidden">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Nick</th>
+              <th>Score</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a id="play-again-btn" href="#" class="btn">Play again</a>
+        <a href="/" class="btn btn-secondary">New quiz</a>
+      </div>
+    </div>
+
+    <div id="not-found-view" class="not-found-view hidden">
+      <p id="not-found-message" class="not-found-message"></p>
+      <p><a href="/" class="not-found-link">Back to home</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Questions come from <a href="https://opentdb.com" target="_blank" rel="noopener noreferrer" class="footer-link">Open Trivia DB (https://opentdb.com)</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="footer-link">CC BY-SA 4.0</a>.</p>
+  </footer>
+
+  <script src="common.js"></script>
+  <script src="result.js"></script>
+</body>
+</html>

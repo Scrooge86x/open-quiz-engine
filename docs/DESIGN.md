@@ -111,6 +111,7 @@ Request body validation errors keep the default FastAPI 422 body.
 - External and user text is always inserted with `textContent`.
 - Responsive, readable on a phone. Errors from the API are shown in a red box under the form.
 - Refreshing the play page shows the current question; feedback for an already submitted answer is not restored.
+- Dark theme is the default. A toggle button on every page switches to the light theme; the choice is saved in `localStorage` (script `theme-init.js` applies it before first paint).
 
 ## 11. Constants (`src/config.py`)
 `APP_TITLE = "Quiz Application"`, `APP_VERSION = "0.1.0"`, `DATABASE_URL = "sqlite:///quiz.db"`, `TRIVIA_API_URL = "https://opentdb.com/api.php"`, `TRIVIA_TIMEOUT_SECONDS = 10`, `TRIVIA_CODE_SUCCESS = 0`, `TRIVIA_CODE_NOT_ENOUGH_QUESTIONS = 1`, `TRIVIA_CODE_RATE_LIMITED = 5`, `RATE_LIMIT_RETRY_SECONDS = 5`, `MIN_QUESTIONS = 1`, `MAX_QUESTIONS = 20`, `DEFAULT_QUESTIONS = 10`, `MIN_NICK_LENGTH = 1`, `MAX_NICK_LENGTH = 30`, `LEADERBOARD_SIZE = 10`, `QUESTION_TYPE_MULTIPLE = "multiple"`, `QUESTION_TYPE_BOOLEAN = "boolean"`, `BOOLEAN_OPTIONS = ("True", "False")`.

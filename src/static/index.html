@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+  <script src="theme-init.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle color theme"></button>
+  <div class="container">
+    <h1>Create a Quiz</h1>
+    <form id="create-quiz-form">
+      <div class="form-group">
+        <label for="question-count">Number of questions</label>
+        <input type="number" id="question-count" name="question_count" min="1" max="20" value="10" required>
+      </div>
+      <div class="form-group">
+        <label for="difficulty">Difficulty</label>
+        <select id="difficulty" name="difficulty">
+          <option value="">Any</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <button type="submit" id="create-btn">Create quiz</button>
+    </form>
+    <div id="error-box" class="hidden"></div>
+  </div>
+  <footer>
+    <p>Questions come from <a href="https://opentdb.com" target="_blank" rel="noopener noreferrer" class="footer-link">Open Trivia DB (https://opentdb.com)</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="footer-link">CC BY-SA 4.0</a>.</p>
+  </footer>
+  <script src="common.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
