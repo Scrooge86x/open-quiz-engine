@@ -15,22 +15,6 @@ function formatDifficulty(difficulty) {
   return difficulty;
 }
 
-function showNotFound(message) {
-  const quizView = document.getElementById("quiz-view");
-  const notFoundView = document.getElementById("not-found-view");
-  const notFoundMessage = document.getElementById("not-found-message");
-
-  if (quizView) {
-    quizView.style.display = "none";
-  }
-  if (notFoundView) {
-    notFoundView.style.display = "flex";
-  }
-  if (notFoundMessage) {
-    notFoundMessage.textContent = message;
-  }
-}
-
 async function loadLeaderboard(quizId) {
   const leaderboardTable = document.getElementById("leaderboard-table");
   const leaderboardBody = document.getElementById("leaderboard-body");
@@ -49,8 +33,8 @@ async function loadLeaderboard(quizId) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const quizId = getQueryParam("id");
-  if (!quizId) {
-    showNotFound("Quiz not found.");
+  if (!quizId || !quizId.trim()) {
+    showNotFound(NO_QUIZ_ID_MESSAGE);
     return;
   }
 
@@ -58,13 +42,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     quiz = await apiRequest("GET", `/api/quizzes/${encodeURIComponent(quizId)}`);
   } catch (err) {
+    if (err.code === "quiz_not_found") {
+      showNotFound(err.message);
+      return;
+    }
     showNotFound(err.message);
     return;
   }
 
   const quizView = document.getElementById("quiz-view");
   if (quizView) {
-    quizView.style.display = "flex";
+    quizView.classList.remove("hidden");
   }
 
   const questionCountEl = document.getElementById("quiz-question-count");

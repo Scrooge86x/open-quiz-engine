@@ -28,12 +28,16 @@ async function loadQuestion() {
       redirectToResult();
       return;
     }
+    if (err.code === "attempt_not_found") {
+      showNotFound(err.message);
+      return;
+    }
     showError(err.message);
     return;
   }
 
   if (playView) {
-    playView.style.display = "flex";
+    playView.classList.remove("hidden");
   }
 
   renderQuestion(question);
@@ -82,6 +86,10 @@ async function handleAnswer(question, selectedIndex) {
       { question_id: question.question_id, selected_index: selectedIndex }
     );
   } catch (err) {
+    if (err.code === "attempt_not_found") {
+      showNotFound(err.message);
+      return;
+    }
     enableOptions();
     showError(err.message);
     return;
@@ -152,14 +160,14 @@ function showFeedback(options, correctIndex, isCorrect, finished) {
   }
 
   if (feedbackEl) {
-    feedbackEl.style.display = "flex";
+    feedbackEl.classList.remove("hidden");
   }
 }
 
 function hideFeedback() {
   const feedbackEl = document.getElementById("feedback");
   if (feedbackEl) {
-    feedbackEl.style.display = "none";
+    feedbackEl.classList.add("hidden");
   }
   const feedbackMessageEl = document.getElementById("feedback-message");
   if (feedbackMessageEl) {
@@ -169,8 +177,8 @@ function hideFeedback() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (!attemptId) {
-    showError("No attempt id provided.");
+  if (!attemptId || !attemptId.trim()) {
+    showNotFound(NO_ATTEMPT_ID_MESSAGE);
     return;
   }
   loadQuestion();

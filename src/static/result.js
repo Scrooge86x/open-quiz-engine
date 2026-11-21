@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const attemptId = getQueryParam("attempt");
-  if (!attemptId) {
-    showError("No attempt id provided.");
+  if (!attemptId || !attemptId.trim()) {
+    showNotFound(NO_ATTEMPT_ID_MESSAGE);
     return;
   }
 
@@ -12,13 +12,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       `/api/attempts/${encodeURIComponent(attemptId)}/result`
     );
   } catch (err) {
+    if (err.code === "attempt_not_found") {
+      showNotFound(err.message);
+      return;
+    }
     showError(err.message);
     return;
   }
 
   const resultView = document.getElementById("result-view");
   if (resultView) {
-    resultView.style.display = "flex";
+    resultView.classList.remove("hidden");
   }
 
   const nickEl = document.getElementById("result-nick");
@@ -37,20 +41,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (result.duration_seconds === null || result.duration_seconds === undefined) {
     if (timeEl) {
-      timeEl.closest("p").style.display = "none";
+      timeEl.closest("p").classList.add("hidden");
     }
     if (notFinishedEl) {
-      notFinishedEl.style.display = "flex";
+      notFinishedEl.classList.remove("hidden");
     }
     if (backToGameLink) {
       backToGameLink.href = `play.html?attempt=${encodeURIComponent(attemptId)}`;
     }
   } else {
     if (timeEl) {
+      timeEl.closest("p").classList.remove("hidden");
       timeEl.textContent = formatDuration(result.duration_seconds);
     }
     if (notFinishedEl) {
-      notFinishedEl.style.display = "none";
+      notFinishedEl.classList.add("hidden");
     }
   }
 

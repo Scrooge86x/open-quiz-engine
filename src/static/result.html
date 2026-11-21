@@ -10,7 +10,7 @@
 <body>
   <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle color theme"></button>
   <div class="container">
-    <div id="result-view" style="display: none; flex-direction: column; gap: 1.5rem;">
+    <div id="result-view" class="main-content hidden">
       <h1>Quiz Result</h1>
 
       <div class="quiz-info">
@@ -19,17 +19,17 @@
         <p><strong>Time:</strong> <span id="result-time"></span></p>
       </div>
 
-      <div id="not-finished" style="display: none; flex-direction: column; gap: 0.75rem;">
-        <p style="color: var(--text-muted);">This attempt is not finished yet.</p>
-        <p><a id="back-to-game" href="#" style="color: var(--primary-color); text-decoration: underline;">Back to the game</a></p>
+      <div id="not-finished" class="not-finished hidden">
+        <p class="text-muted">This attempt is not finished yet.</p>
+        <p><a id="back-to-game" href="#" class="back-link">Back to the game</a></p>
       </div>
 
-      <div id="error-box"></div>
+      <div id="error-box" class="hidden"></div>
 
       <div class="leaderboard-section">
         <h2>Leaderboard</h2>
-        <p id="leaderboard-empty" style="display: none; color: var(--text-muted);">Nobody has finished this quiz yet.</p>
-        <table id="leaderboard-table" style="display: none;">
+        <p id="leaderboard-empty" class="hidden text-muted">Nobody has finished this quiz yet.</p>
+        <table id="leaderboard-table" class="hidden">
           <thead>
             <tr>
               <th>Rank</th>
@@ -44,13 +44,18 @@
 
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
         <a id="play-again-btn" href="#" class="btn">Play again</a>
-        <a href="/" class="btn" style="background-color: var(--secondary-bg); color: var(--text-color);">New quiz</a>
+        <a href="/" class="btn btn-secondary">New quiz</a>
       </div>
+    </div>
+
+    <div id="not-found-view" class="not-found-view hidden">
+      <p id="not-found-message" class="not-found-message"></p>
+      <p><a href="/" class="not-found-link">Back to home</a></p>
     </div>
   </div>
 
   <footer>
-    <p>Questions come from <a href="https://opentdb.com" target="_blank" rel="noopener noreferrer">Open Trivia DB (https://opentdb.com)</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</p>
+    <p>Questions come from <a href="https://opentdb.com" target="_blank" rel="noopener noreferrer" class="footer-link">Open Trivia DB (https://opentdb.com)</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="footer-link">CC BY-SA 4.0</a>.</p>
   </footer>
 
   <script src="common.js"></script>

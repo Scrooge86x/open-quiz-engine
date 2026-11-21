@@ -1,3 +1,6 @@
+const NO_QUIZ_ID_MESSAGE = "No quiz id provided.";
+const NO_ATTEMPT_ID_MESSAGE = "No attempt id provided.";
+
 async function apiRequest(method, path, body) {
   const options = {
     method: method,
@@ -43,7 +46,7 @@ function showError(message) {
   const errorBox = document.getElementById("error-box");
   if (errorBox) {
     errorBox.textContent = message;
-    errorBox.style.display = "block";
+    errorBox.classList.remove("hidden");
   }
 }
 
@@ -51,7 +54,22 @@ function clearError() {
   const errorBox = document.getElementById("error-box");
   if (errorBox) {
     errorBox.textContent = "";
-    errorBox.style.display = "none";
+    errorBox.classList.add("hidden");
+  }
+}
+
+function showNotFound(message) {
+  const mainContents = document.querySelectorAll(".main-content");
+  mainContents.forEach((el) => {
+    el.classList.add("hidden");
+  });
+  const notFoundView = document.getElementById("not-found-view");
+  if (notFoundView) {
+    notFoundView.classList.remove("hidden");
+  }
+  const notFoundMessage = document.getElementById("not-found-message");
+  if (notFoundMessage) {
+    notFoundMessage.textContent = message;
   }
 }
 
@@ -70,16 +88,16 @@ function formatDuration(seconds) {
 function renderLeaderboard(entries, tableEl, bodyEl, emptyEl) {
   if (!Array.isArray(entries) || entries.length === 0) {
     if (emptyEl) {
-      emptyEl.style.display = "block";
+      emptyEl.classList.remove("hidden");
     }
     if (tableEl) {
-      tableEl.style.display = "none";
+      tableEl.classList.add("hidden");
     }
     return;
   }
 
   if (emptyEl) {
-    emptyEl.style.display = "none";
+    emptyEl.classList.add("hidden");
   }
 
   if (bodyEl) {
@@ -108,7 +126,7 @@ function renderLeaderboard(entries, tableEl, bodyEl, emptyEl) {
   }
 
   if (tableEl) {
-    tableEl.style.display = "table";
+    tableEl.classList.remove("hidden");
   }
 }
 
