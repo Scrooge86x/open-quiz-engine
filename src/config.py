@@ -1,5 +1,6 @@
 APP_TITLE = "Quiz Application"
 APP_VERSION = "0.1.0"
+API_PREFIX = "/api"
 DATABASE_URL = "sqlite:///quiz.db"
 TRIVIA_API_URL = "https://opentdb.com/api.php"
 TRIVIA_TIMEOUT_SECONDS = 10

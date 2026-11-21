@@ -1,11 +1,11 @@
 from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 
 from src.api.attempt_routes import router as attempt_router
 from src.api.error_handlers import register_error_handlers
 from src.api.quiz_routes import router as quiz_router
+from src.api.static_files import AppStaticFiles
 from src.config import APP_TITLE, APP_VERSION, DATABASE_URL
 from src.db.engine import create_db_engine, create_session_factory, create_tables
 
@@ -21,7 +21,7 @@ def create_app(database_url: str = DATABASE_URL) -> FastAPI:
     register_error_handlers(app)
     app.include_router(quiz_router)
     app.include_router(attempt_router)
-    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
+    app.mount("/", AppStaticFiles(directory=STATIC_DIR, html=True), name="static")
     return app
 
 
