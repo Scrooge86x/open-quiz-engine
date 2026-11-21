@@ -13,6 +13,7 @@ from src.db.models.quiz import Quiz
 from src.errors.conflict import AttemptFinishedError, WrongQuestionError
 from src.errors.not_found import AttemptNotFoundError, QuizNotFoundError
 from src.logic.answer_checker import is_answer_correct
+from src.logic.nick_validator import validate_nick
 
 
 @dataclass(frozen=True)
@@ -51,12 +52,13 @@ class AttemptService:
         self._clock = clock
 
     def start_attempt(self, quiz_id: str, nick: str) -> Attempt:
+        validated_nick = validate_nick(nick)
         quiz = self._get_quiz(quiz_id)
 
         attempt = Attempt(
             id=str(uuid.uuid4()),
             quiz_id=quiz.id,
-            nick=nick,
+            nick=validated_nick,
             current_position=0,
             score=0,
             started_at=self._clock(),
