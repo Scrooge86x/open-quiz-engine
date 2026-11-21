@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from src.api.error_handlers import register_error_handlers
 from src.config import APP_TITLE, APP_VERSION, DATABASE_URL
 from src.db.engine import create_db_engine, create_session_factory, create_tables
 
@@ -10,6 +11,7 @@ def create_app(database_url: str = DATABASE_URL) -> FastAPI:
     session_factory = create_session_factory(engine)
     create_tables(engine)
     app.state.session_factory = session_factory
+    register_error_handlers(app)
     return app
 
 
