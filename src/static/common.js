@@ -66,3 +66,48 @@ function formatDuration(seconds) {
   }
   return `${Number(seconds).toFixed(1)} s`;
 }
+
+function renderLeaderboard(entries, tableEl, bodyEl, emptyEl) {
+  if (!Array.isArray(entries) || entries.length === 0) {
+    if (emptyEl) {
+      emptyEl.style.display = "block";
+    }
+    if (tableEl) {
+      tableEl.style.display = "none";
+    }
+    return;
+  }
+
+  if (emptyEl) {
+    emptyEl.style.display = "none";
+  }
+
+  if (bodyEl) {
+    bodyEl.replaceChildren();
+    for (const entry of entries) {
+      const row = document.createElement("tr");
+
+      const rankCell = document.createElement("td");
+      rankCell.textContent = entry.rank;
+      row.appendChild(rankCell);
+
+      const nickCell = document.createElement("td");
+      nickCell.textContent = entry.nick;
+      row.appendChild(nickCell);
+
+      const scoreCell = document.createElement("td");
+      scoreCell.textContent = entry.score;
+      row.appendChild(scoreCell);
+
+      const timeCell = document.createElement("td");
+      timeCell.textContent = formatDuration(entry.duration_seconds);
+      row.appendChild(timeCell);
+
+      bodyEl.appendChild(row);
+    }
+  }
+
+  if (tableEl) {
+    tableEl.style.display = "table";
+  }
+}

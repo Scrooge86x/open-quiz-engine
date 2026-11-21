@@ -41,49 +41,7 @@ async function loadLeaderboard(quizId) {
       "GET",
       `/api/quizzes/${encodeURIComponent(quizId)}/leaderboard`
     );
-
-    if (!Array.isArray(entries) || entries.length === 0) {
-      if (leaderboardEmpty) {
-        leaderboardEmpty.style.display = "block";
-      }
-      if (leaderboardTable) {
-        leaderboardTable.style.display = "none";
-      }
-      return;
-    }
-
-    if (leaderboardEmpty) {
-      leaderboardEmpty.style.display = "none";
-    }
-    if (leaderboardBody) {
-      leaderboardBody.replaceChildren();
-
-      for (const entry of entries) {
-        const row = document.createElement("tr");
-
-        const rankCell = document.createElement("td");
-        rankCell.textContent = entry.rank;
-        row.appendChild(rankCell);
-
-        const nickCell = document.createElement("td");
-        nickCell.textContent = entry.nick;
-        row.appendChild(nickCell);
-
-        const scoreCell = document.createElement("td");
-        scoreCell.textContent = entry.score;
-        row.appendChild(scoreCell);
-
-        const timeCell = document.createElement("td");
-        timeCell.textContent = formatDuration(entry.duration_seconds);
-        row.appendChild(timeCell);
-
-        leaderboardBody.appendChild(row);
-      }
-    }
-
-    if (leaderboardTable) {
-      leaderboardTable.style.display = "table";
-    }
+    renderLeaderboard(entries, leaderboardTable, leaderboardBody, leaderboardEmpty);
   } catch (err) {
     showError(err.message);
   }
