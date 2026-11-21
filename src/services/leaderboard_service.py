@@ -39,16 +39,15 @@ class LeaderboardService:
 
         rows: list[LeaderboardRow] = []
         for attempt in attempts:
-            if attempt.finished_at is not None:
-                duration = (attempt.finished_at - attempt.started_at).total_seconds()
-                rows.append(
-                    LeaderboardRow(
-                        nick=attempt.nick,
-                        score=attempt.score,
-                        duration_seconds=round(duration, 1),
-                        finished_at=attempt.finished_at,
-                    )
+            duration = (attempt.finished_at - attempt.started_at).total_seconds()
+            rows.append(
+                LeaderboardRow(
+                    nick=attempt.nick,
+                    score=attempt.score,
+                    duration_seconds=round(duration, 1),
+                    finished_at=attempt.finished_at,
                 )
+            )
 
         sorted_rows = sort_leaderboard_rows(rows)
         limited_rows = sorted_rows[:limit]
@@ -58,7 +57,7 @@ class LeaderboardService:
                 rank=rank,
                 nick=row.nick,
                 score=row.score,
-                duration_seconds=round(row.duration_seconds, 1),
+                duration_seconds=row.duration_seconds,
             )
             for rank, row in enumerate(limited_rows, start=1)
         ]
