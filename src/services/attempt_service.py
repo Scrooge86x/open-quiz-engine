@@ -12,7 +12,7 @@ from src.db.models.question import Question
 from src.db.models.quiz import Quiz
 from src.errors.conflict import AttemptFinishedError, WrongQuestionError
 from src.errors.not_found import AttemptNotFoundError, QuizNotFoundError
-from src.logic.answer_checker import is_answer_correct
+from src.logic.answer_checker import is_answer_correct, validate_option_index
 from src.logic.nick_validator import validate_nick
 
 
@@ -92,6 +92,8 @@ class AttemptService:
         current_question = self._get_question_by_position(attempt.quiz_id, attempt.current_position)
         if question_id != current_question.id:
             raise WrongQuestionError()
+
+        validate_option_index(selected_index, len(current_question.options))
 
         is_correct = is_answer_correct(selected_index, current_question.correct_index)
         answer = Answer(
